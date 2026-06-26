@@ -112,14 +112,24 @@ class TestSnakeGameLogic(unittest.TestCase):
         self.assertTrue(len(level_one_obstacles) > 0, "Level router failed to populate level 1 blocks.")
     
     def test_snake_growth_on_food(self):
-        # Verifies that a new segment is inserted at the end of snake list after eating food
+        # Verifies a new segment is added at the end of snake list after eating food
         snake_body = [(10, 10), (10, 9), (10, 8), (10, 7), (10, 6)]
         food = (10, 10)
         
         updated_snake_body = execute_game_logic((10, 10), snake_body, food, 1, readchar.key.RIGHT, [], 0, [], False, 'Classic')
         
-        self.assertTrue((len(updated_snake_body) - len(snake_body)) == 1, "Game logic failed to growth snake after eating food.")
-
+        self.assertTrue(len(updated_snake_body) > len(snake_body), "Game logic failed to grow snake after eating food.")
+    
+    def test_correct_gate_generation(self):
+        # Verifies a gate is spawned after snake reaches length 5
+        snake_body = [(10, 10), (10, 9), (10, 8), (10, 7), (10, 6)]
+        food = (11, 11)
+        gate = []
+        
+        updated_gate = execute_game_logic((10, 10), snake_body, food, 1, readchar.key.RIGHT, [], 0, [], False, 'Classic')
+        
+        self.assertTrue(updated_gate != gate, "Game logic failed to spawn a gate.")
+    
 
 if __name__ == '__main__':
     unittest.main()

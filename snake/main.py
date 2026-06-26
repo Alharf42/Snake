@@ -1,4 +1,4 @@
-# The main module, from where the game starts and
+# The main module, here the game boots up and
 # the main environment is chosen
 from console_loop import console_game
 from gui import game
